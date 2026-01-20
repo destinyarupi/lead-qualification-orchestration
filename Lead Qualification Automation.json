@@ -1,0 +1,3208 @@
+{
+  "name": "Lead Qualification Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0b3afdbe-285e-4d7c-b5c6-a1d1844d0d40",
+              "leftValue": "={{ $json.bookingStatus }}",
+              "rightValue": "Booked",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1088,
+        1488
+      ],
+      "id": "75ad61f7-bec6-4dc2-a874-77427a444c53",
+      "name": "❓ Check Booking Status"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.callOutcome }}",
+                    "rightValue": "A",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "5c709b91-fbd4-4870-91f5-f0c0588bfa16"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "240f8938-6c43-47b1-a48c-2f2fc7f4134d",
+                    "leftValue": "={{ $json.callOutcome }}",
+                    "rightValue": "B",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5941c8b2-f304-4fe0-a868-6a8ee844f4cf",
+                    "leftValue": "={{ $json.callOutcome }}",
+                    "rightValue": "C",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": 2
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1296,
+        1600
+      ],
+      "id": "e101ee39-354d-4e5f-8071-8617821ce709",
+      "name": "🔀 Route by Outcome"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7165ea6d-4e85-4cba-8c18-20453a47a9bc",
+              "name": "leadName",
+              "value": "={{ $json.question_pKbKzV.value }}",
+              "type": "string"
+            },
+            {
+              "id": "d0603b55-cceb-4964-aa05-a4ea17d52c2c",
+              "name": "leadEmail",
+              "value": "={{ $json.question_1lAlRM.value }}",
+              "type": "string"
+            },
+            {
+              "id": "a088af0e-4162-421b-810f-6d8245253183",
+              "name": "leadPhone",
+              "value": "={{ $json.question_MbebVY.value }}",
+              "type": "string"
+            },
+            {
+              "id": "154c92cd-3d5c-426a-9254-64cf1ff49a6a",
+              "name": "businessNiche",
+              "value": "={{ $json.question_J696oJ.value }}",
+              "type": "string"
+            },
+            {
+              "id": "03b5eb5c-a7ef-41b7-9c12-9a844bcadd27",
+              "name": "monthlyRevenue",
+              "value": "={{ $json.question_g0D0zN.value }}",
+              "type": "string"
+            },
+            {
+              "id": "8ec43117-e2ee-4c76-a149-efdb0134c3f6",
+              "name": "bottleneck",
+              "value": "={{ $json.question_y6P610.value }}",
+              "type": "string"
+            },
+            {
+              "id": "ae96b7f9-c4a2-4f26-9a39-b0086938f0e8",
+              "name": "source",
+              "value": "={{ $json.question_XDxDQO.value || 'Not Provided' }}",
+              "type": "string"
+            },
+            {
+              "id": "dea96522-56e5-41e8-b89a-b47396b055b4",
+              "name": "submissionDate",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "0380d7b1-f451-4d7d-9dc7-1cd8d7642a6f",
+              "name": "recordId",
+              "value": "={{ $json.respondentId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1760,
+        1360
+      ],
+      "id": "cab60e83-2b8b-44fc-ad15-665c522a666f",
+      "name": "🔧 Extract Form Data"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1568,
+        1360
+      ],
+      "id": "d8e95b2f-e10a-40f3-a292-dec736c5519a",
+      "name": "⏱️ Humanize Timing",
+      "webhookId": "bd943a0c-4c38-4e44-9514-adfa83a87e89"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appdJ7rSp1rAzcLBT",
+          "mode": "list",
+          "cachedResultName": "Lead Qualification System ",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl0AlbaSFOBh3k4N",
+          "mode": "list",
+          "cachedResultName": "All Leads",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT/tbl0AlbaSFOBh3k4N"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Callback Requested": false,
+            "Full Name": "={{ $json.leadName }}",
+            "Email": "={{ $json.leadEmail }}",
+            "Phone": "={{ $json.leadPhone }}",
+            "Business Niche": "={{ $json.businessNiche }}",
+            "Monthly Revenue": "={{ $json.monthlyRevenue }}",
+            "Biggest Bottleneck": "={{ $json.bottleneck }}",
+            "Source": "={{ $json.source }}",
+            "Submission Date": "={{ $json.submissionDate }}",
+            "Call Status": "Pending",
+            "Call Duration": 0
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Lead ID",
+              "displayName": "Lead ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Business Niche",
+              "displayName": "Business Niche",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Monthly Revenue",
+              "displayName": "Monthly Revenue",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Biggest Bottleneck",
+              "displayName": "Biggest Bottleneck",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Submission Date",
+              "displayName": "Submission Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Outcome",
+              "displayName": "Call Outcome",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "B",
+                  "value": "B"
+                },
+                {
+                  "name": "C",
+                  "value": "C"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Status",
+              "displayName": "Call Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Completed",
+                  "value": "Completed"
+                },
+                {
+                  "name": "Failed",
+                  "value": "Failed"
+                },
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Retry",
+                  "value": "Retry"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Status",
+              "displayName": "Booking Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Booked",
+                  "value": "Booked"
+                },
+                {
+                  "name": "Not Booked",
+                  "value": "Not Booked"
+                },
+                {
+                  "name": "Not Applicable",
+                  "value": "Not Applicable"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Intent Level",
+              "displayName": "Intent Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "High",
+                  "value": "High"
+                },
+                {
+                  "name": "Medium",
+                  "value": "Medium"
+                },
+                {
+                  "name": "Low",
+                  "value": "Low"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Urgency Level",
+              "displayName": "Urgency Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Immediate",
+                  "value": "Immediate"
+                },
+                {
+                  "name": "Near Term",
+                  "value": "Near Term"
+                },
+                {
+                  "name": "Future",
+                  "value": "Future"
+                },
+                {
+                  "name": "None",
+                  "value": "None"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Revenue Tier",
+              "displayName": "Revenue Tier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pre-revenue",
+                  "value": "Pre-revenue"
+                },
+                {
+                  "name": "<5k",
+                  "value": "<5k"
+                },
+                {
+                  "name": "5k-10k",
+                  "value": "5k-10k"
+                },
+                {
+                  "name": "10k-25k",
+                  "value": "10k-25k"
+                },
+                {
+                  "name": "25k+",
+                  "value": "25k+"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Response Quality",
+              "displayName": "Response Quality",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Clear",
+                  "value": "Clear"
+                },
+                {
+                  "name": "Mixed",
+                  "value": "Mixed"
+                },
+                {
+                  "name": "Vague",
+                  "value": "Vague"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Summary",
+              "displayName": "Call Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Duration",
+              "displayName": "Call Duration",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Objections Raised",
+              "displayName": "Objections Raised",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Callback Requested",
+              "displayName": "Callback Requested",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Reason",
+              "displayName": "Booking Reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAPI Call ID",
+              "displayName": "VAPI Call ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Date & Time",
+              "displayName": "Meeting Date & Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Link",
+              "displayName": "Meeting Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Updated",
+              "displayName": "Last Updated",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Weekly Analytics Metrics",
+              "displayName": "Weekly Analytics Metrics",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -1696,
+        1616
+      ],
+      "id": "3e66da08-6c03-46d4-ac4e-8264eab5229c",
+      "name": "💾 Create Lead Record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "6E42xUuqTYIpeCDw",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appdJ7rSp1rAzcLBT",
+          "mode": "list",
+          "cachedResultName": "Lead Qualification System ",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl0AlbaSFOBh3k4N",
+          "mode": "list",
+          "cachedResultName": "All Leads",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT/tbl0AlbaSFOBh3k4N"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Callback Requested": "={{ $json.callbackRequested }}",
+            "Call Duration": "={{ $json.callDuration }}",
+            "Call Outcome": "={{ $json.callOutcome }}",
+            "Call Status": "={{ $json.callStatus }}",
+            "Booking Status": "={{ $json.bookingStatus }}",
+            "Intent Level": "={{ $json.intentLevel }}",
+            "Urgency Level": "={{ $json.urgencyLevel }}",
+            "Revenue Tier": "={{ $json.revenueTier }}",
+            "Call Summary": "={{ $json.callSummary }}",
+            "Response Quality": "={{ $json.responseQuality }}",
+            "Objections Raised": "={{ $json.objectionsRaised }}",
+            "Booking Reason": "={{ $json.bookingReason }}",
+            "VAPI Call ID": "={{ $json.vapiCallId }}",
+            "id": "={{ $('💾 Create Lead Record').item.json.id }}",
+            "Meeting Date & Time": "={{ $json.meetingDateTime || '' }}",
+            "Meeting Link": "={{ $json.meetingLink || '' }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Lead ID",
+              "displayName": "Lead ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Business Niche",
+              "displayName": "Business Niche",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Monthly Revenue",
+              "displayName": "Monthly Revenue",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Biggest Bottleneck",
+              "displayName": "Biggest Bottleneck",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Submission Date",
+              "displayName": "Submission Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Call Outcome",
+              "displayName": "Call Outcome",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "B",
+                  "value": "B"
+                },
+                {
+                  "name": "C",
+                  "value": "C"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Status",
+              "displayName": "Call Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Completed",
+                  "value": "Completed"
+                },
+                {
+                  "name": "Failed",
+                  "value": "Failed"
+                },
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Retry",
+                  "value": "Retry"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Status",
+              "displayName": "Booking Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Booked",
+                  "value": "Booked"
+                },
+                {
+                  "name": "Not Booked",
+                  "value": "Not Booked"
+                },
+                {
+                  "name": "Not Applicable",
+                  "value": "Not Applicable"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Intent Level",
+              "displayName": "Intent Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "High",
+                  "value": "High"
+                },
+                {
+                  "name": "Medium",
+                  "value": "Medium"
+                },
+                {
+                  "name": "Low",
+                  "value": "Low"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Urgency Level",
+              "displayName": "Urgency Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Immediate",
+                  "value": "Immediate"
+                },
+                {
+                  "name": "Near Term",
+                  "value": "Near Term"
+                },
+                {
+                  "name": "Future",
+                  "value": "Future"
+                },
+                {
+                  "name": "None",
+                  "value": "None"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Revenue Tier",
+              "displayName": "Revenue Tier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pre-revenue",
+                  "value": "Pre-revenue"
+                },
+                {
+                  "name": "<5k",
+                  "value": "<5k"
+                },
+                {
+                  "name": "5k-10k",
+                  "value": "5k-10k"
+                },
+                {
+                  "name": "10k-25k",
+                  "value": "10k-25k"
+                },
+                {
+                  "name": "25k+",
+                  "value": "25k+"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Response Quality",
+              "displayName": "Response Quality",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Clear",
+                  "value": "Clear"
+                },
+                {
+                  "name": "Mixed",
+                  "value": "Mixed"
+                },
+                {
+                  "name": "Vague",
+                  "value": "Vague"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Summary",
+              "displayName": "Call Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Duration",
+              "displayName": "Call Duration",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Objections Raised",
+              "displayName": "Objections Raised",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Callback Requested",
+              "displayName": "Callback Requested",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Reason",
+              "displayName": "Booking Reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAPI Call ID",
+              "displayName": "VAPI Call ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Date & Time",
+              "displayName": "Meeting Date & Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Link",
+              "displayName": "Meeting Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Updated",
+              "displayName": "Last Updated",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Weekly Analytics Metrics",
+              "displayName": "Weekly Analytics Metrics",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -864,
+        1200
+      ],
+      "id": "8bfce9f8-094b-41ac-953d-b1e4c6eb5833",
+      "name": "✅ Update: Call Booked",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "6E42xUuqTYIpeCDw",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appdJ7rSp1rAzcLBT",
+          "mode": "list",
+          "cachedResultName": "Lead Qualification System ",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl0AlbaSFOBh3k4N",
+          "mode": "list",
+          "cachedResultName": "All Leads",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT/tbl0AlbaSFOBh3k4N"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Callback Requested": "={{ $json.callbackRequested }}",
+            "Call Duration": "={{ $json.callDuration }}",
+            "Call Outcome": "={{ $json.callOutcome }}",
+            "Call Status": "={{ $json.callStatus }}",
+            "Booking Status": "={{ $json.bookingStatus }}",
+            "Intent Level": "={{ $json.intentLevel }}",
+            "Urgency Level": "={{ $json.urgencyLevel }}",
+            "Revenue Tier": "={{ $json.revenueTier }}",
+            "Call Summary": "={{ $json.callSummary }}",
+            "Response Quality": "={{ $json.responseQuality }}",
+            "Objections Raised": "={{ $json.objectionsRaised }}",
+            "Booking Reason": "={{ $json.bookingReason }}",
+            "VAPI Call ID": "={{ $json.vapiCallId }}",
+            "id": "={{ $('💾 Create Lead Record').item.json.id }}",
+            "Meeting Date & Time": "={{ $json.meetingDateTime || '' }}",
+            "Meeting Link": "={{ $json.meetingLink || '' }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Lead ID",
+              "displayName": "Lead ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Business Niche",
+              "displayName": "Business Niche",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Monthly Revenue",
+              "displayName": "Monthly Revenue",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Biggest Bottleneck",
+              "displayName": "Biggest Bottleneck",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Submission Date",
+              "displayName": "Submission Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Call Outcome",
+              "displayName": "Call Outcome",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "B",
+                  "value": "B"
+                },
+                {
+                  "name": "C",
+                  "value": "C"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Status",
+              "displayName": "Call Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Completed",
+                  "value": "Completed"
+                },
+                {
+                  "name": "Failed",
+                  "value": "Failed"
+                },
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Retry",
+                  "value": "Retry"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Status",
+              "displayName": "Booking Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Booked",
+                  "value": "Booked"
+                },
+                {
+                  "name": "Not Booked",
+                  "value": "Not Booked"
+                },
+                {
+                  "name": "Not Applicable",
+                  "value": "Not Applicable"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Intent Level",
+              "displayName": "Intent Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "High",
+                  "value": "High"
+                },
+                {
+                  "name": "Medium",
+                  "value": "Medium"
+                },
+                {
+                  "name": "Low",
+                  "value": "Low"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Urgency Level",
+              "displayName": "Urgency Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Immediate",
+                  "value": "Immediate"
+                },
+                {
+                  "name": "Near Term",
+                  "value": "Near Term"
+                },
+                {
+                  "name": "Future",
+                  "value": "Future"
+                },
+                {
+                  "name": "None",
+                  "value": "None"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Revenue Tier",
+              "displayName": "Revenue Tier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pre-revenue",
+                  "value": "Pre-revenue"
+                },
+                {
+                  "name": "<5k",
+                  "value": "<5k"
+                },
+                {
+                  "name": "5k-10k",
+                  "value": "5k-10k"
+                },
+                {
+                  "name": "10k-25k",
+                  "value": "10k-25k"
+                },
+                {
+                  "name": "25k+",
+                  "value": "25k+"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Response Quality",
+              "displayName": "Response Quality",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Clear",
+                  "value": "Clear"
+                },
+                {
+                  "name": "Mixed",
+                  "value": "Mixed"
+                },
+                {
+                  "name": "Vague",
+                  "value": "Vague"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Summary",
+              "displayName": "Call Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Duration",
+              "displayName": "Call Duration",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Objections Raised",
+              "displayName": "Objections Raised",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Callback Requested",
+              "displayName": "Callback Requested",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Reason",
+              "displayName": "Booking Reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAPI Call ID",
+              "displayName": "VAPI Call ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Date & Time",
+              "displayName": "Meeting Date & Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Link",
+              "displayName": "Meeting Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Updated",
+              "displayName": "Last Updated",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Weekly Analytics Metrics",
+              "displayName": "Weekly Analytics Metrics",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -848,
+        1424
+      ],
+      "id": "b8c34f29-0ce6-47eb-9d6b-05778d42af4a",
+      "name": "📅 Update: Calendly Needed",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "6E42xUuqTYIpeCDw",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appdJ7rSp1rAzcLBT",
+          "mode": "list",
+          "cachedResultName": "Lead Qualification System ",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl0AlbaSFOBh3k4N",
+          "mode": "list",
+          "cachedResultName": "All Leads",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT/tbl0AlbaSFOBh3k4N"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Callback Requested": "={{ $json.callbackRequested }}",
+            "Call Duration": "={{ $json.callDuration }}",
+            "Call Outcome": "={{ $json.callOutcome }}",
+            "Call Status": "={{ $json.callStatus }}",
+            "Booking Status": "={{ $json.bookingStatus }}",
+            "Intent Level": "={{ $json.intentLevel }}",
+            "Urgency Level": "={{ $json.urgencyLevel }}",
+            "Revenue Tier": "={{ $json.revenueTier }}",
+            "Call Summary": "={{ $json.callSummary }}",
+            "Response Quality": "={{ $json.responseQuality }}",
+            "Objections Raised": "={{ $json.objectionsRaised }}",
+            "Booking Reason": "={{ $json.bookingReason }}",
+            "VAPI Call ID": "={{ $json.vapiCallId }}",
+            "id": "={{ $('💾 Create Lead Record').item.json.id }}",
+            "Meeting Date & Time": "={{ $json.meetingDateTime || '' }}",
+            "Meeting Link": "={{ $json.meetingLink || '' }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Lead ID",
+              "displayName": "Lead ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Business Niche",
+              "displayName": "Business Niche",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Monthly Revenue",
+              "displayName": "Monthly Revenue",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Biggest Bottleneck",
+              "displayName": "Biggest Bottleneck",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Submission Date",
+              "displayName": "Submission Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Call Outcome",
+              "displayName": "Call Outcome",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "B",
+                  "value": "B"
+                },
+                {
+                  "name": "C",
+                  "value": "C"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Status",
+              "displayName": "Call Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Completed",
+                  "value": "Completed"
+                },
+                {
+                  "name": "Failed",
+                  "value": "Failed"
+                },
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Retry",
+                  "value": "Retry"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Status",
+              "displayName": "Booking Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Booked",
+                  "value": "Booked"
+                },
+                {
+                  "name": "Not Booked",
+                  "value": "Not Booked"
+                },
+                {
+                  "name": "Not Applicable",
+                  "value": "Not Applicable"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Intent Level",
+              "displayName": "Intent Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "High",
+                  "value": "High"
+                },
+                {
+                  "name": "Medium",
+                  "value": "Medium"
+                },
+                {
+                  "name": "Low",
+                  "value": "Low"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Urgency Level",
+              "displayName": "Urgency Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Immediate",
+                  "value": "Immediate"
+                },
+                {
+                  "name": "Near Term",
+                  "value": "Near Term"
+                },
+                {
+                  "name": "Future",
+                  "value": "Future"
+                },
+                {
+                  "name": "None",
+                  "value": "None"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Revenue Tier",
+              "displayName": "Revenue Tier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pre-revenue",
+                  "value": "Pre-revenue"
+                },
+                {
+                  "name": "<5k",
+                  "value": "<5k"
+                },
+                {
+                  "name": "5k-10k",
+                  "value": "5k-10k"
+                },
+                {
+                  "name": "10k-25k",
+                  "value": "10k-25k"
+                },
+                {
+                  "name": "25k+",
+                  "value": "25k+"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Response Quality",
+              "displayName": "Response Quality",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Clear",
+                  "value": "Clear"
+                },
+                {
+                  "name": "Mixed",
+                  "value": "Mixed"
+                },
+                {
+                  "name": "Vague",
+                  "value": "Vague"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Summary",
+              "displayName": "Call Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Duration",
+              "displayName": "Call Duration",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Objections Raised",
+              "displayName": "Objections Raised",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Callback Requested",
+              "displayName": "Callback Requested",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Reason",
+              "displayName": "Booking Reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAPI Call ID",
+              "displayName": "VAPI Call ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Date & Time",
+              "displayName": "Meeting Date & Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Link",
+              "displayName": "Meeting Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Updated",
+              "displayName": "Last Updated",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Weekly Analytics Metrics",
+              "displayName": "Weekly Analytics Metrics",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -992,
+        1680
+      ],
+      "id": "2c9c6f86-fbde-4f9a-b9ad-22774378f44a",
+      "name": "📊 Update: Nurture Lead",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "6E42xUuqTYIpeCDw",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appdJ7rSp1rAzcLBT",
+          "mode": "list",
+          "cachedResultName": "Lead Qualification System ",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl0AlbaSFOBh3k4N",
+          "mode": "list",
+          "cachedResultName": "All Leads",
+          "cachedResultUrl": "https://airtable.com/appdJ7rSp1rAzcLBT/tbl0AlbaSFOBh3k4N"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Callback Requested": "={{ $json.callbackRequested }}",
+            "Call Duration": "={{ $json.callDuration }}",
+            "Call Outcome": "={{ $json.callOutcome }}",
+            "Call Status": "={{ $json.callStatus }}",
+            "Booking Status": "={{ $json.bookingStatus }}",
+            "Intent Level": "={{ $json.intentLevel }}",
+            "Urgency Level": "={{ $json.urgencyLevel }}",
+            "Revenue Tier": "={{ $json.revenueTier }}",
+            "Call Summary": "={{ $json.callSummary }}",
+            "Response Quality": "={{ $json.responseQuality }}",
+            "Objections Raised": "={{ $json.objectionsRaised }}",
+            "Booking Reason": "={{ $json.bookingReason }}",
+            "VAPI Call ID": "={{ $json.vapiCallId }}",
+            "id": "={{ $('💾 Create Lead Record').item.json.id }}",
+            "Meeting Date & Time": "={{ $json.meetingDateTime || '' }}",
+            "Meeting Link": "={{ $json.meetingLink || '' }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Lead ID",
+              "displayName": "Lead ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Business Niche",
+              "displayName": "Business Niche",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Monthly Revenue",
+              "displayName": "Monthly Revenue",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Biggest Bottleneck",
+              "displayName": "Biggest Bottleneck",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Submission Date",
+              "displayName": "Submission Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Call Outcome",
+              "displayName": "Call Outcome",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "A",
+                  "value": "A"
+                },
+                {
+                  "name": "B",
+                  "value": "B"
+                },
+                {
+                  "name": "C",
+                  "value": "C"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Status",
+              "displayName": "Call Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Completed",
+                  "value": "Completed"
+                },
+                {
+                  "name": "Failed",
+                  "value": "Failed"
+                },
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Retry",
+                  "value": "Retry"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Status",
+              "displayName": "Booking Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Booked",
+                  "value": "Booked"
+                },
+                {
+                  "name": "Not Booked",
+                  "value": "Not Booked"
+                },
+                {
+                  "name": "Not Applicable",
+                  "value": "Not Applicable"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Intent Level",
+              "displayName": "Intent Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "High",
+                  "value": "High"
+                },
+                {
+                  "name": "Medium",
+                  "value": "Medium"
+                },
+                {
+                  "name": "Low",
+                  "value": "Low"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Urgency Level",
+              "displayName": "Urgency Level",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Immediate",
+                  "value": "Immediate"
+                },
+                {
+                  "name": "Near Term",
+                  "value": "Near Term"
+                },
+                {
+                  "name": "Future",
+                  "value": "Future"
+                },
+                {
+                  "name": "None",
+                  "value": "None"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Revenue Tier",
+              "displayName": "Revenue Tier",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pre-revenue",
+                  "value": "Pre-revenue"
+                },
+                {
+                  "name": "<5k",
+                  "value": "<5k"
+                },
+                {
+                  "name": "5k-10k",
+                  "value": "5k-10k"
+                },
+                {
+                  "name": "10k-25k",
+                  "value": "10k-25k"
+                },
+                {
+                  "name": "25k+",
+                  "value": "25k+"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Response Quality",
+              "displayName": "Response Quality",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Clear",
+                  "value": "Clear"
+                },
+                {
+                  "name": "Mixed",
+                  "value": "Mixed"
+                },
+                {
+                  "name": "Vague",
+                  "value": "Vague"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Summary",
+              "displayName": "Call Summary",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Call Duration",
+              "displayName": "Call Duration",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Objections Raised",
+              "displayName": "Objections Raised",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Callback Requested",
+              "displayName": "Callback Requested",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Booking Reason",
+              "displayName": "Booking Reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "VAPI Call ID",
+              "displayName": "VAPI Call ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Date & Time",
+              "displayName": "Meeting Date & Time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Meeting Link",
+              "displayName": "Meeting Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Updated",
+              "displayName": "Last Updated",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Weekly Analytics Metrics",
+              "displayName": "Weekly Analytics Metrics",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -1056,
+        1936
+      ],
+      "id": "18b9a283-15f3-40f1-bcf8-82812a497e3b",
+      "name": "❌ Update: Disqualified",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "6E42xUuqTYIpeCDw",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0A45S79YVC",
+          "mode": "list",
+          "cachedResultName": "automation-logs"
+        },
+        "text": "=❌ *Lead Not Qualified*\n\n*Name:* {{ $('📞 VAPI Outbound Call').item.json.leadName }}\n*Business:* {{ $('📞 VAPI Outbound Call').item.json.businessNiche }}\n*Summary:* {{ $('📞 VAPI Outbound Call').item.json.callSummary }}\n*Reason:* {{ $('📞 VAPI Outbound Call').item.json.bookingReason }}\n\nNo follow-up required.",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        -784,
+        1936
+      ],
+      "id": "454bbb1a-4f35-40d4-a24a-cd71b3c6c2d8",
+      "name": "💬 Slack: Disqualified Log",
+      "webhookId": "408ec3fc-1f4e-43f5-b535-10222fa67d63",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "3a7qa7ILc8JNM5xA",
+          "name": "Slack"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -512,
+        1504
+      ],
+      "id": "b1303e40-2c4a-468a-9736-1587d53bd3d7",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate personalized content for this lead:\n\nOutcome: {{ $json.fields['Call Outcome'] }}\nBooking Status: {{ $json.fields['Booking Status'] }}\nLead Name: {{ $json.fields['Full Name'] }}\nEmail: {{ $json.fields.Email }}\nBusiness: {{ $json.fields['Business Niche'] }}\nRevenue: {{ $json.fields['Monthly Revenue'] }}\nBottleneck: {{ $json.fields['Biggest Bottleneck'] }}\nCall Summary: {{ $json.fields['Call Summary'] }}\nIntent: {{ $json.fields['Intent Level'] }}\nUrgency: {{ $json.fields['Urgency Level'] }}\nObjections: {{ $json.fields['Objections Raised'] }}\nMeeting DateTime: {{ $json.fields['Meeting Date & Time'] || '' }}\nMeeting Link: {{ $json.fields['Meeting Link'] || ''}}\n\nInstructions based on outcome:\n\nIF Outcome A + Booking Status \"Booked\":\n- Qualification: Qualified Leads\n- Email: Warm booking confirmation mentioning their specific challenge, include meeting date/time and meeting link\n- Slack: Celebratory alert for sales team with key details\n\nIF Outcome A + Booking Status \"Not Booked\":\n- Qualification: Qualified Leads\n- Email: Friendly email with Calendly link (https://calendly.com/scalableroute/strategy-call) and reference their specific bottleneck\n- Slack: Alert that qualified lead needs follow-up\n\nIF Outcome B:\n- Qualification: Automation Logs\n- Email: Nurture email offering helpful resources related to their challenge\n- Slack: Log entry for nurture pipeline\n\nDesign philosophy:\n- Minimal, calm, premium\n- Heavy white space\n- Soft neutral colors\n- Typography-first design\n- No visual noise\n\nSTRICT RULES:\n- Output ONLY valid HTML\n- Use table-based layout only\n- Inline CSS only\n- No <html>, <head>, or <body> tags\n- Max width 560px\n- Use Apple system font stack\n- Background #f5f5f7\n- Primary text #1d1d1f\n- Secondary text #6e6e73\n- CTA color #0071e3\n- Border radius 12px\n- Avoid bold unless necessary\n\nReturn ONLY the HTML body for emails and slack message \n\nEnd mails with:\nBest Regards, \nKayla from Scalable Route",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are a copywriting AI for ScalableRoute. Generate personalized emails and Slack messages based on lead qualification outcomes. Be warm, professional, and reference specific details."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -288,
+        1520
+      ],
+      "id": "5e5d7620-c31f-4d38-9ead-71a3108a277e",
+      "name": "🤖 AI: Generate Email & Slack"
+    },
+    {
+      "parameters": {
+        "model": "anthropic/claude-3.5-sonnet",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        1728
+      ],
+      "id": "403fb26f-6c51-4c6a-8010-bfe85fe60e22",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "0Rnrih3LZoCw54Uj",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "={\n  \"type\": \"object\",\n  \"properties\": {\n    \"Qualification\": {\n    \"type\": \"string\",\n    \"description\": \"Lead qualification\"\n    },\n    \"emailSubject\": {\n      \"type\": \"string\",\n      \"description\": \"Email subject line\"\n    },\n    \"emailBody\": {\n      \"type\": \"string\",\n      \"description\": \"Email body in HTML format\"\n    },\n    \"slackMessage\": {\n      \"type\": \"string\",\n      \"description\": \"Slack message in markdown format\"\n    }\n  },\n  \"required\": [\"emailSubject\", \"emailBody\", \"slackMessage\"]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -112,
+        1728
+      ],
+      "id": "b0ba9543-33bf-438d-8727-bf02b26afdd5",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b137c46d-c872-464c-9cb8-36e69b489722",
+              "leftValue": "={{ $('🤖 AI: Generate Email & Slack').item.json.output.Qualification }}",
+              "rightValue": "Qualified Leads",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        1520
+      ],
+      "id": "f1b32569-c136-4645-bace-d0935477f2e8",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0A45S0AE4W",
+          "mode": "list",
+          "cachedResultName": "qualifed-leads"
+        },
+        "text": "={{ $('🤖 AI: Generate Email & Slack').item.json.output.slackMessage }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        1344
+      ],
+      "id": "60113dbd-9241-410c-9b17-53db7543ff1b",
+      "name": "💬 Slack: Qualified Lead Alert",
+      "webhookId": "408ec3fc-1f4e-43f5-b535-10222fa67d63",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "3a7qa7ILc8JNM5xA",
+          "name": "Slack"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0A45S0AE4W",
+          "mode": "list",
+          "cachedResultName": "qualifed-leads"
+        },
+        "text": "={{ $('🤖 AI: Generate Email & Slack').item.json.output.slackMessage }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        464,
+        1664
+      ],
+      "id": "56059a91-6dd1-4fe0-9eba-222fbc9154fb",
+      "name": "💬 Slack: Nurture Log",
+      "webhookId": "408ec3fc-1f4e-43f5-b535-10222fa67d63",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "3a7qa7ILc8JNM5xA",
+          "name": "Slack"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=efearupi@gmail.com",
+        "subject": "={{ $json.output.emailSubject }}",
+        "message": "={{ $json.output.emailBody }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        48,
+        1520
+      ],
+      "id": "ea8e3ac5-06e4-4b87-958e-ba88e92c5ea2",
+      "name": "✉️ Gmail: Send email to Lead",
+      "webhookId": "a32213f6-f0a9-4f3b-9dad-b13d9f0f335d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "2f2kTQfPQUFOW5MA",
+          "name": "Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 📊 Outcome Routing & Actions",
+        "height": 1008,
+        "width": 944,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1328,
+        1136
+      ],
+      "typeVersion": 1,
+      "id": "a23334dd-7b16-45c3-8d01-0c1950f531b2",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## 🎯 Lead Intake & Qualification",
+        "height": 592,
+        "width": 656
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2000,
+        1232
+      ],
+      "typeVersion": 1,
+      "id": "9fe8f06b-9a6e-4c7d-a352-e45afb308cb2",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## 💬 Notifications & Updates",
+        "height": 624,
+        "width": 1008,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -368,
+        1280
+      ],
+      "typeVersion": 1,
+      "id": "17de70cb-c8c3-49d6-abd8-6006c1d30988",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.vapi.ai/call/phone",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1536,
+        1888
+      ],
+      "id": "d408520b-a963-4164-8a92-f4b9ea0d6c2f",
+      "name": "☎️ VAPI Outbound Call"
+    },
+    {
+      "parameters": {
+        "formId": "WOr26P"
+      },
+      "type": "n8n-nodes-tallyforms.tallyTrigger",
+      "typeVersion": 2,
+      "position": [
+        -1952,
+        1360
+      ],
+      "id": "45f67287-9684-43c1-a83a-2b18085eab7e",
+      "name": "📋 Tally Form Trigger",
+      "webhookId": "7c59554c-0c0f-4a59-9e89-52f6c2f2dbd3",
+      "credentials": {
+        "tallyApi": {
+          "id": "kvjrmZXVpD9Rp1ZQ",
+          "name": "Tally account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Mock VAPI call responses - simulates real call outcomes\n// This randomly generates realistic responses for testing all three outcomes\n\nconst outcomes = ['A', 'B', 'C'];\nconst randomOutcome = outcomes[Math.floor(Math.random() * outcomes.length)];\n\n// Get lead data from previous nodes\nconst leadData = {\n  leadName: $input.first().json.fields['Full Name'],\n  leadEmail: $input.first().json.fields.Email,\n  leadPhone: $input.first().json.fields.Phone,\n  businessNiche: $input.first().json.fields['Business Niche'],\n  monthlyRevenue: $input.first().json.fields['Monthly Revenue'],\n  bottleneck: $input.first().json.fields['Biggest Bottleneck'],\n  source: $input.first().json.fields.Source,\n  submissionDate: $input.first().json.fields['Submission Date']\n};\n\n// Generate mock response based on random outcome\nlet mockResponse;\n\nif (randomOutcome === 'A') {\n  // Outcome A: Qualified Lead\n  const intentRand = Math.random();\n  const urgencyRand = Math.random();\n  const qualityRand = Math.random();\n  const bookingRand = Math.random();\n  \n  mockResponse = {\n    vapiCallId: 'mock_call_' + Date.now(),\n    callStatus: 'Completed',\n    callDuration: Math.floor(Math.random() * 120) + 180, // 3-5 minutes\n    \n    // Structured outputs (CAPITALIZED for Airtable dropdowns)\n    callSummary: `${leadData.leadName} runs a ${leadData.businessNiche} business generating ${leadData.monthlyRevenue} monthly. Main bottleneck: ${leadData.bottleneck}. Highly motivated to implement solutions immediately.`,\n    callOutcome: 'A',\n    intentLevel: intentRand > 0.7 ? 'High' : intentRand > 0.3 ? 'Medium' : 'Low',\n    urgencyLevel: urgencyRand > 0.6 ? 'Immediate' : urgencyRand > 0.3 ? 'Near Term' : urgencyRand > 0.1 ? 'Future' : 'None',\n    revenueTier: leadData.monthlyRevenue.includes('25') ? '25k+' : \n                 leadData.monthlyRevenue.includes('10') ? '10k-25k' : \n                 leadData.monthlyRevenue.includes('5') ? '5k-10k' : \n                 leadData.monthlyRevenue.includes('Less') ? '<5k' : 'Pre-revenue',\n    responseQuality: qualityRand > 0.6 ? 'Clear' : qualityRand > 0.3 ? 'Mixed' : 'Vague',\n    bookingAttempted: true,\n    bookingStatus: bookingRand > 0.4 ? 'Booked' : 'Not Booked',\n    bookingReason: bookingRand > 0.4 ? '' : 'Lead needs to check calendar first',\n    objectionsRaised: Math.random() > 0.6 ? 'None' : 'Concerned about pricing, wants to see ROI first',\n    callbackRequested: false,\n    // Calendar booking details (for Outcome A with Booked status)\nmeetingScheduled: bookingRand > 0.4, // true if booked\nmeetingDateTime: bookingRand > 0.4 ? new Date(Date.now() + (Math.floor(Math.random() * 7) + 1) * 24 * 60 * 60 * 1000).toISOString() : null, // Random date 1-7 days from now\nmeetingLink: bookingRand > 0.4 ? 'https://meet.google.com/abc-defg-hij' : null, // Mock Google Meet link\n    // Include original lead data\n    ...leadData\n  };\n  \n} else if (randomOutcome === 'B') {\n  // Outcome B: Warm but Not Ready\n  const intentRand = Math.random();\n  const urgencyRand = Math.random();\n  \n  mockResponse = {\n    vapiCallId: 'mock_call_' + Date.now(),\n    callStatus: 'Completed',\n    callDuration: Math.floor(Math.random() * 90) + 120, // 2-3.5 minutes\n    \n    callSummary: `${leadData.leadName} is interested in scaling their ${leadData.businessNiche} business but still in exploration phase. Revenue: ${leadData.monthlyRevenue}. Not urgent, wants to gather information first.`,\n    callOutcome: 'B',\n    intentLevel: intentRand > 0.5 ? 'Medium' : 'Low',\n    urgencyLevel: urgencyRand > 0.5 ? 'Near Term' : 'Future',\n    revenueTier: leadData.monthlyRevenue.includes('25') ? '25k+' : \n                 leadData.monthlyRevenue.includes('10') ? '10k-25k' : \n                 leadData.monthlyRevenue.includes('5') ? '5k-10k' : \n                 leadData.monthlyRevenue.includes('Less') ? '<5k' : 'Pre-revenue',\n    responseQuality: 'Mixed',\n    bookingAttempted: false,\n    bookingStatus: 'Not Applicable',\n    bookingReason: 'Lead not ready for strategy call yet',\n    objectionsRaised: Math.random() > 0.5 ? 'Wants to see pricing first, bootstrapping heavily' : 'Still figuring things out, no clear timeline',\n    callbackRequested: Math.random() > 0.7,\n    \n    ...leadData\n  };\n  \n} else {\n  // Outcome C: Not Qualified\n  mockResponse = {\n    vapiCallId: 'mock_call_' + Date.now(),\n    callStatus: 'Completed',\n    callDuration: Math.floor(Math.random() * 60) + 60, // 1-2 minutes\n    \n    callSummary: `${leadData.leadName} is pre-revenue or very early stage in ${leadData.businessNiche}. Not ready for agency partnership. Lacks clear business foundation or urgency.`,\n    callOutcome: 'C',\n    intentLevel: 'Low',\n    urgencyLevel: 'None',\n    revenueTier: 'Pre-revenue',\n    responseQuality: 'Vague',\n    bookingAttempted: false,\n    bookingStatus: 'Not Applicable',\n    bookingReason: 'Lead does not meet qualification criteria',\n    objectionsRaised: Math.random() > 0.5 ? 'No budget, just researching' : 'Pre-revenue, still planning business',\n    callbackRequested: false,\n    \n    ...leadData\n  };\n}\n\nreturn [mockResponse];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1488,
+        1616
+      ],
+      "id": "3988ace0-5699-4fc8-8871-b7d628caacfb",
+      "name": "📞 VAPI Outbound Call"
+    }
+  ],
+  "pinData": {
+    "📋 Tally Form Trigger": [
+      {
+        "json": {
+          "id": "xXbG0Qd",
+          "formId": "WOr26P",
+          "formName": "Scale Your Business With Clarity 🚀\n",
+          "respondentId": "9q7x5J4",
+          "createdAt": "2025-12-30T16:45:59.000Z",
+          "question_pKbKzV": {
+            "label": "Full Name\n",
+            "value": "Elo Arupi",
+            "type": "INPUT_TEXT"
+          },
+          "question_1lAlRM": {
+            "label": "Email Address",
+            "value": "eloarupi@gmail.com",
+            "type": "INPUT_EMAIL"
+          },
+          "question_MbebVY": {
+            "label": "Phone Number",
+            "value": "+2348121354485",
+            "type": "INPUT_PHONE_NUMBER"
+          },
+          "question_J696oJ": {
+            "label": "Business Niche\n",
+            "value": "Hair ",
+            "type": "INPUT_TEXT"
+          },
+          "question_g0D0zN": {
+            "label": "Current Monthly Revenue\n",
+            "value": "Less than $1,000",
+            "type": "MULTIPLE_CHOICE"
+          },
+          "question_y6P610": {
+            "label": "Biggest Scaling Bottleneck\n",
+            "value": "Need more clients ",
+            "type": "TEXTAREA"
+          },
+          "question_XDxDQO": {
+            "label": "How Did You Find Us?\n",
+            "value": "Friend",
+            "type": "INPUT_TEXT"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "🔧 Extract Form Data": [
+      {
+        "json": {
+          "leadName": "Elo Arupi",
+          "leadEmail": "eloarupi@gmail.com",
+          "leadPhone": "+2348121354485",
+          "businessNiche": "Hair ",
+          "monthlyRevenue": "Less than $1,000",
+          "bottleneck": "Need more clients ",
+          "source": "Friend",
+          "submissionDate": "2025-12-30T11:45:59.795-05:00",
+          "recordId": "9q7x5J4"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "💾 Create Lead Record": [
+      {
+        "json": {
+          "id": "rec3qmniVVhkWjlqw",
+          "createdTime": "2025-12-30T16:46:01.000Z",
+          "fields": {
+            "Full Name": "Elo Arupi",
+            "Lead ID": 18,
+            "Email": "eloarupi@gmail.com",
+            "Phone": "+2348121354485",
+            "Business Niche": "Hair ",
+            "Monthly Revenue": "Less than $1,000",
+            "Biggest Bottleneck": "Need more clients ",
+            "Source": "Friend",
+            "Submission Date": "2025-12-30T16:45:59.795Z",
+            "Call Status": "Pending",
+            "Call Duration": 0,
+            "Last Updated": "2025-12-30T16:46:01.000Z"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "⏱️ Humanize Timing": [
+      {
+        "json": {
+          "leadName": "Elo Arupi",
+          "leadEmail": "eloarupi@gmail.com",
+          "leadPhone": "+2348121354485",
+          "businessNiche": "Hair ",
+          "monthlyRevenue": "Less than $1,000",
+          "bottleneck": "Need more clients ",
+          "source": "Friend",
+          "submissionDate": "2025-12-30T11:45:59.795-05:00",
+          "recordId": "9q7x5J4"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "❓ Check Booking Status": {
+      "main": [
+        [
+          {
+            "node": "✅ Update: Call Booked",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "📅 Update: Calendly Needed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 Route by Outcome": {
+      "main": [
+        [
+          {
+            "node": "❓ Check Booking Status",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "📊 Update: Nurture Lead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "❌ Update: Disqualified",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔧 Extract Form Data": {
+      "main": [
+        [
+          {
+            "node": "⏱️ Humanize Timing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "⏱️ Humanize Timing": {
+      "main": [
+        [
+          {
+            "node": "💾 Create Lead Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "💾 Create Lead Record": {
+      "main": [
+        [
+          {
+            "node": "📞 VAPI Outbound Call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "✅ Update: Call Booked": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📅 Update: Calendly Needed": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "📊 Update: Nurture Lead": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "❌ Update: Disqualified": {
+      "main": [
+        [
+          {
+            "node": "💬 Slack: Disqualified Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "🤖 AI: Generate Email & Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "🤖 AI: Generate Email & Slack",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "🤖 AI: Generate Email & Slack",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🤖 AI: Generate Email & Slack": {
+      "main": [
+        [
+          {
+            "node": "✉️ Gmail: Send email to Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "💬 Slack: Qualified Lead Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "💬 Slack: Nurture Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "✉️ Gmail: Send email to Lead": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "☎️ VAPI Outbound Call": {
+      "main": [
+        []
+      ]
+    },
+    "📋 Tally Form Trigger": {
+      "main": [
+        [
+          {
+            "node": "🔧 Extract Form Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📞 VAPI Outbound Call": {
+      "main": [
+        [
+          {
+            "node": "🔀 Route by Outcome",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "efd0bf05-8507-4fd1-9d15-fefc7c72f51d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8b006a0c2860e2ebe4a18b401240e0a3d67106ad5486c566af12dd05e34cbe2a"
+  },
+  "id": "8Yhcu6btCp6XK5kS",
+  "tags": []
+}
